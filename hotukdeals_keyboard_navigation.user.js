@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name           HotUKDeals keyboard nav
-// @description    Navigates through HotUKDeals listings with j and k keys
-// @version        0.2
+// @description    Navigates through HotUKDeals listings and moves pics to left hand side
+// @version        0.3
 // @author         Chris Poole <chris@hackernet.co.uk>
 // @namespace      http://hackernet.co.uk/
 // @homepage       http://userscripts.org/scripts/show/12581
-// @id             greasemonkey@hackernet.co.uk
+// @id             hukdnav@hackernet.co.uk
 // @run-at         document-end
 // @include        *.hotukdeals.com*
 // ==/UserScript==
@@ -84,3 +84,15 @@ function keyListener(k) {
 		aftermove();
 	}
 }
+
+function addGlobalStyle(css) {
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if (!head) { return; }
+    style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = css;
+    head.appendChild(style);
+}
+
+addGlobalStyle('.item-listing div.side { float: left; padding: 10px; } .item-listing div.side div { display: none; } .item-listing div.vote { background: inherit; } ');
